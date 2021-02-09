@@ -16,6 +16,7 @@ rvm:
   # - rbx-3
 
 gemfile:
+  - gemfiles/active_record_61.gemfile
   - gemfiles/active_record_60.gemfile
   - gemfiles/active_record_52.gemfile
   - gemfiles/active_record_51.gemfile
@@ -64,6 +65,8 @@ matrix:
     - rvm: 2.4.10
       gemfile: gemfiles/active_record_edge.gemfile
     - rvm: 2.4.10
+      gemfile: gemfiles/active_record_61.gemfile
+    - rvm: 2.4.10
       gemfile: gemfiles/active_record_60.gemfile
     - rvm: 2.4.10
       gemfile: gemfiles/active_record_42.gemfile
@@ -71,6 +74,8 @@ matrix:
       gemfile: gemfiles/active_record_41.gemfile
     - rvm: 2.3.8
       gemfile: gemfiles/active_record_edge.gemfile
+    - rvm: 2.3.8
+      gemfile: gemfiles/active_record_61.gemfile
     - rvm: 2.3.8
       gemfile: gemfiles/active_record_60.gemfile
     - rvm: ruby-head
