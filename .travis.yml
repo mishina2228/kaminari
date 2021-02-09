@@ -40,15 +40,15 @@ cache: bundler
 
 matrix:
   exclude:
-    - rvm: 2.7.0
+    - rvm: 2.7.2
       gemfile: gemfiles/active_record_52.gemfile
-    - rvm: 2.7.0
+    - rvm: 2.7.2
       gemfile: gemfiles/active_record_51.gemfile
-    - rvm: 2.7.0
+    - rvm: 2.7.2
       gemfile: gemfiles/active_record_50.gemfile
-    - rvm: 2.7.0
+    - rvm: 2.7.2
       gemfile: gemfiles/active_record_42.gemfile
-    - rvm: 2.7.0
+    - rvm: 2.7.2
       gemfile: gemfiles/active_record_41.gemfile
     - rvm: 2.6.6
       gemfile: gemfiles/active_record_edge.gemfile
