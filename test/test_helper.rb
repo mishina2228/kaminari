@@ -18,6 +18,7 @@ require 'fake_gem'
 
 require 'fake_app/rails_app'
 require 'test/unit/rails/test_help'
+require 'shoulda-context'
 
 # Requires supporting files with custom matchers and macros, etc,
 # in ./support/ and its subdirectories.

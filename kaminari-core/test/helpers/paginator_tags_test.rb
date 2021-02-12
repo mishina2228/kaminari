@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 require 'test_helper'
-
+puts 'debug message for sanity check'
 if defined? ::Kaminari::ActionView
+  puts 'it seems ::Kaminari::ActionView is defined'
   class PaginatorTagsTest < ActionView::TestCase
     # A test paginator that can detect instantiated tags inside
     class TagSpy < Kaminari::Helpers::Paginator
@@ -71,4 +72,7 @@ if defined? ::Kaminari::ActionView
       end
     end
   end
+else
+  p '!!!!!!! ::Kaminari::ActionView is not defined !!!!!!'
+  p '!!!!!!! so tests in this file did not executed !!!!!!'
 end
