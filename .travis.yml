@@ -93,6 +93,8 @@ matrix:
     - rvm: ruby-head
       gemfile: gemfiles/active_record_41.gemfile
     - rvm: jruby-9.2.14.0
+      gemfile: gemfiles/active_record_edge.gemfile
+    - rvm: jruby-9.2.14.0
       gemfile: gemfiles/active_record_42.gemfile
     - rvm: jruby-9.2.14.0
       gemfile: gemfiles/active_record_41.gemfile
