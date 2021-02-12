@@ -14,7 +14,6 @@ rvm:
   - 2.4.10
   - 2.3.8
   - jruby-9.2.9.0
-  # - rbx-3
 
 gemfile:
   - gemfiles/active_record_61.gemfile
@@ -113,6 +112,5 @@ matrix:
   allow_failures:
     - rvm: ruby-head
     - rvm: jruby-9.2.9.0
-    # - rvm: rbx-3
     - gemfile: gemfiles/active_record_edge.gemfile
   fast_finish: true
