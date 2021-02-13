@@ -116,8 +116,11 @@ jobs:
     env:
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
       DB: ${{ matrix.db }}
-      POSTGRES_HOST: postgres
+      POSTGRES_HOST: localhost
       POSTGRES_PORT: 5432
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ''
+      MYSQL_HOST: localhost
       MYSQL_USERNAME: root
       MYSQL_ROOT_PASSWORD: ''
     steps:
