@@ -10,11 +10,13 @@ jobs:
       mysql:
         image: mysql
         ports:
-          - 3306
+          - 3306:3306
       postgresql:
         image: postgres
         ports:
-          - 5432
+          - 5432:5432
+        env:
+          POSTGRES_USER: postgres
     strategy:
       fail-fast: false
       matrix:
