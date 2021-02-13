@@ -106,6 +106,7 @@ jobs:
     runs-on: ubuntu-16.04
     env:
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
+      DB: ${{ matrix.db }}
     steps:
       - uses: actions/checkout@v2
       - name: Set up Ruby
@@ -113,7 +114,4 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby_version }}
           bundler-cache: true
-      - name: Build and test with Rake
-        env:
-          BUNDLE_GEMFILE: ${{ matrix.gemfile }}
-        run: bundle exec rake test
+      - run: bundle exec rake test
