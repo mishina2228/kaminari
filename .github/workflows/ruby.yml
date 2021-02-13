@@ -6,6 +6,11 @@ on:
 
 jobs:
   build:
+    services:
+      mysql:
+        image: mysql
+      postgresql:
+        image: postgres
     strategy:
       fail-fast: false
       matrix:
