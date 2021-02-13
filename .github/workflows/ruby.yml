@@ -9,8 +9,12 @@ jobs:
     services:
       mysql:
         image: mysql
+        ports:
+          - 3306
       postgresql:
         image: postgres
+        ports:
+          - 5432
     strategy:
       fail-fast: false
       matrix:
