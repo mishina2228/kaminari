@@ -118,6 +118,7 @@ jobs:
     env:
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
       DB: ${{ matrix.db }}
+      POSTGRES_HOST: postgres
     steps:
       - uses: actions/checkout@v2
       - name: Set up Ruby
