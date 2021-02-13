@@ -13,7 +13,6 @@ rvm:
   - 2.5.8
   - 2.4.10
   - 2.3.8
-  - jruby-9.2.14.0
 
 gemfile:
   - gemfiles/active_record_61.gemfile
@@ -92,12 +91,6 @@ matrix:
       gemfile: gemfiles/active_record_42.gemfile
     - rvm: ruby-head
       gemfile: gemfiles/active_record_41.gemfile
-    - rvm: jruby-9.2.14.0
-      gemfile: gemfiles/active_record_edge.gemfile
-    - rvm: jruby-9.2.14.0
-      gemfile: gemfiles/active_record_42.gemfile
-    - rvm: jruby-9.2.14.0
-      gemfile: gemfiles/active_record_41.gemfile
   include:
     - rvm: ruby-head
       gemfile: gemfiles/active_record_edge.gemfile
@@ -113,6 +106,5 @@ matrix:
       env: DB=sqlite3
   allow_failures:
     - rvm: ruby-head
-    - rvm: jruby-9.2.14.0
     - gemfile: gemfiles/active_record_edge.gemfile
   fast_finish: true

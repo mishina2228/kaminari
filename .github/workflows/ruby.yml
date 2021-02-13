@@ -25,7 +25,7 @@ jobs:
           POSTGRES_PASSWORD: ''
           POSTGRES_DB: kaminari_test
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
         ruby_version:
           - ruby-head
@@ -35,7 +35,6 @@ jobs:
           - 2.5
           - 2.4
           - 2.3
-          - jruby
         gemfile:
           - gemfiles/active_record_61.gemfile
           - gemfiles/active_record_60.gemfile
@@ -101,12 +100,6 @@ jobs:
           - ruby_version: ruby-head
             gemfile: gemfiles/active_record_42.gemfile
           - ruby_version: ruby-head
-            gemfile: gemfiles/active_record_41.gemfile
-          - ruby_version: jruby
-            gemfile: gemfiles/active_record_edge.gemfile
-          - ruby_version: jruby
-            gemfile: gemfiles/active_record_42.gemfile
-          - ruby_version: jruby
             gemfile: gemfiles/active_record_41.gemfile
         include:
           - ruby_version: ruby-head
