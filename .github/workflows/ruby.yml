@@ -78,7 +78,7 @@ jobs:
             gemfile: gemfiles/active_record_edge.gemfile
           - ruby_version: 2.3
             gemfile: gemfiles/active_record_61.gemfile
-          - ruby_version: 2.3.
+          - ruby_version: 2.3
             gemfile: gemfiles/active_record_60.gemfile
           - ruby_version: ruby-head
             gemfile: gemfiles/active_record_42.gemfile
