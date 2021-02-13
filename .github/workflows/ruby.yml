@@ -14,7 +14,7 @@ jobs:
         env:
           MYSQL_HOST: localhost
           MYSQL_USERNAME: root
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_ROOT_PASSWORD: root
           MYSQL_DATABASE: kaminari_test
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
       postgresql:
@@ -24,8 +24,13 @@ jobs:
         env:
           POSTGRES_HOST: localhost
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: ''
+          POSTGRES_PASSWORD: postgres
           POSTGRES_DB: kaminari_test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     strategy:
       fail-fast: true
       matrix:
@@ -123,11 +128,11 @@ jobs:
       POSTGRES_HOST: localhost
       POSTGRES_PORT: 5432
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: ''
+      POSTGRES_PASSWORD: postgres
       MYSQL_HOST: localhost
       MYSQL_PORT: 3306
       MYSQL_USERNAME: root
-      MYSQL_ROOT_PASSWORD: ''
+      MYSQL_ROOT_PASSWORD: root
     steps:
       - uses: actions/checkout@v2
       - name: Set up Ruby
