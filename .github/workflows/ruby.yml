@@ -36,12 +36,12 @@ jobs:
       matrix:
         ruby_version:
           - ruby-head
-          - 3.0
-          - 2.7
-          - 2.6
-          - 2.5
-          - 2.4
-          - 2.3
+          - '3.0'
+          - '2.7'
+          - '2.6'
+          - '2.5'
+          - '2.4'
+          - '2.3'
         gemfile:
           - gemfiles/active_record_61.gemfile
           - gemfiles/active_record_60.gemfile
@@ -56,53 +56,53 @@ jobs:
           - postgresql
           - mysql
         exclude:
-          - ruby_version: 3.0
+          - ruby_version: '3.0'
             gemfile: gemfiles/active_record_52.gemfile
-          - ruby_version: 3.0
+          - ruby_version: '3.0'
             gemfile: gemfiles/active_record_51.gemfile
-          - ruby_version: 3.0
+          - ruby_version: '3.0'
             gemfile: gemfiles/active_record_50.gemfile
-          - ruby_version: 3.0
+          - ruby_version: '3.0'
             gemfile: gemfiles/active_record_42.gemfile
-          - ruby_version: 3.0
+          - ruby_version: '3.0'
             gemfile: gemfiles/active_record_41.gemfile
-          - ruby_version: 2.7
+          - ruby_version: '2.7'
             gemfile: gemfiles/active_record_52.gemfile
-          - ruby_version: 2.7
+          - ruby_version: '2.7'
             gemfile: gemfiles/active_record_51.gemfile
-          - ruby_version: 2.7
+          - ruby_version: '2.7'
             gemfile: gemfiles/active_record_50.gemfile
-          - ruby_version: 2.7
+          - ruby_version: '2.7'
             gemfile: gemfiles/active_record_42.gemfile
-          - ruby_version: 2.7
+          - ruby_version: '2.7'
             gemfile: gemfiles/active_record_41.gemfile
-          - ruby_version: 2.6
+          - ruby_version: '2.6'
             gemfile: gemfiles/active_record_edge.gemfile
-          - ruby_version: 2.6
+          - ruby_version: '2.6'
             gemfile: gemfiles/active_record_42.gemfile
-          - ruby_version: 2.6
+          - ruby_version: '2.6'
             gemfile: gemfiles/active_record_41.gemfile
-          - ruby_version: 2.5
+          - ruby_version: '2.5'
             gemfile: gemfiles/active_record_edge.gemfile
-          - ruby_version: 2.5
+          - ruby_version: '2.5'
             gemfile: gemfiles/active_record_42.gemfile
-          - ruby_version: 2.5
+          - ruby_version: '2.5'
             gemfile: gemfiles/active_record_41.gemfile
-          - ruby_version: 2.4
+          - ruby_version: '2.4'
             gemfile: gemfiles/active_record_edge.gemfile
-          - ruby_version: 2.4
+          - ruby_version: '2.4'
             gemfile: gemfiles/active_record_61.gemfile
-          - ruby_version: 2.4
+          - ruby_version: '2.4'
             gemfile: gemfiles/active_record_60.gemfile
-          - ruby_version: 2.4
+          - ruby_version: '2.4'
             gemfile: gemfiles/active_record_42.gemfile
-          - ruby_version: 2.4
+          - ruby_version: '2.4'
             gemfile: gemfiles/active_record_41.gemfile
-          - ruby_version: 2.3
+          - ruby_version: '2.3'
             gemfile: gemfiles/active_record_edge.gemfile
-          - ruby_version: 2.3
+          - ruby_version: '2.3'
             gemfile: gemfiles/active_record_61.gemfile
-          - ruby_version: 2.3
+          - ruby_version: '2.3'
             gemfile: gemfiles/active_record_60.gemfile
           - ruby_version: ruby-head
             gemfile: gemfiles/active_record_42.gemfile
@@ -112,13 +112,13 @@ jobs:
           - ruby_version: ruby-head
             gemfile: gemfiles/active_record_edge.gemfile
             db: sqlite3
-          - ruby_version: 2.2
+          - ruby_version: '2.2'
             gemfile: gemfiles/active_record_51.gemfile
             db: sqlite3
-          - ruby_version: 2.1
+          - ruby_version: '2.1'
             gemfile: gemfiles/active_record_42.gemfile
             db: sqlite3
-          - ruby_version: 2.0
+          - ruby_version: '2.0'
             gemfile: gemfiles/active_record_42.gemfile
             db: sqlite3
     runs-on: ubuntu-latest
@@ -145,5 +145,10 @@ jobs:
           sudo apt-get install -y mysql-client libmysqlclient-dev
           mysql --host 127.0.0.1 --port 3306 -uroot -proot -e "SHOW GRANTS FOR 'root'@'localhost'"
           mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql --host 127.0.0.1 --port 3306 -uroot -proot mysql
+        continue-on-error: true
+      - name: Very PostgreSQL connection from host
+        run: |
+          sudo apt install postgresql
+          psql 'postgres://postgres:postgres@localhost:5432'
         continue-on-error: true
       - run: bundle exec rake test
