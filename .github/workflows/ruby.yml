@@ -1,0 +1,119 @@
+name: Ruby
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  build:
+    strategy:
+      fail-fast: true
+      matrix:
+        ruby_version:
+          - ruby-head
+          - 3.0
+          - 2.7
+          - 2.6
+          - 2.5
+          - 2.4
+          - 2.3
+          - jruby
+        gemfile:
+          - gemfiles/active_record_61.gemfile
+          - gemfiles/active_record_60.gemfile
+          - gemfiles/active_record_52.gemfile
+          - gemfiles/active_record_51.gemfile
+          - gemfiles/active_record_50.gemfile
+          - gemfiles/active_record_42.gemfile
+          - gemfiles/active_record_41.gemfile
+          - gemfiles/active_record_edge.gemfile
+        db:
+          - sqlite3
+          - postgresql
+          - mysql
+        exclude:
+          - ruby_version: 3.0
+            gemfile: gemfiles/active_record_52.gemfile
+          - ruby_version: 3.0
+            gemfile: gemfiles/active_record_51.gemfile
+          - ruby_version: 3.0
+            gemfile: gemfiles/active_record_50.gemfile
+          - ruby_version: 3.0
+            gemfile: gemfiles/active_record_42.gemfile
+          - ruby_version: 3.0
+            gemfile: gemfiles/active_record_41.gemfile
+          - ruby_version: 2.7
+            gemfile: gemfiles/active_record_52.gemfile
+          - ruby_version: 2.7
+            gemfile: gemfiles/active_record_51.gemfile
+          - ruby_version: 2.7
+            gemfile: gemfiles/active_record_50.gemfile
+          - ruby_version: 2.7
+            gemfile: gemfiles/active_record_42.gemfile
+          - ruby_version: 2.7
+            gemfile: gemfiles/active_record_41.gemfile
+          - ruby_version: 2.6
+            gemfile: gemfiles/active_record_edge.gemfile
+          - ruby_version: 2.6
+            gemfile: gemfiles/active_record_42.gemfile
+          - ruby_version: 2.6
+            gemfile: gemfiles/active_record_41.gemfile
+          - ruby_version: 2.5
+            gemfile: gemfiles/active_record_edge.gemfile
+          - ruby_version: 2.5
+            gemfile: gemfiles/active_record_42.gemfile
+          - ruby_version: 2.5
+            gemfile: gemfiles/active_record_41.gemfile
+          - ruby_version: 2.4
+            gemfile: gemfiles/active_record_edge.gemfile
+          - ruby_version: 2.4
+            gemfile: gemfiles/active_record_61.gemfile
+          - ruby_version: 2.4
+            gemfile: gemfiles/active_record_60.gemfile
+          - ruby_version: 2.4
+            gemfile: gemfiles/active_record_42.gemfile
+          - ruby_version: 2.4
+            gemfile: gemfiles/active_record_41.gemfile
+          - ruby_version: 2.3
+            gemfile: gemfiles/active_record_edge.gemfile
+          - ruby_version: 2.3
+            gemfile: gemfiles/active_record_61.gemfile
+          - ruby_version: 2.3.
+            gemfile: gemfiles/active_record_60.gemfile
+          - ruby_version: ruby-head
+            gemfile: gemfiles/active_record_42.gemfile
+          - ruby_version: ruby-head
+            gemfile: gemfiles/active_record_41.gemfile
+          - ruby_version: jruby
+            gemfile: gemfiles/active_record_edge.gemfile
+          - ruby_version: jruby
+            gemfile: gemfiles/active_record_42.gemfile
+          - ruby_version: jruby
+            gemfile: gemfiles/active_record_41.gemfile
+        include:
+          - ruby_version: ruby-head
+            gemfile: gemfiles/active_record_edge.gemfile
+            db: sqlite3
+          - ruby_version: 2.2
+            gemfile: gemfiles/active_record_51.gemfile
+            db: sqlite3
+          - ruby_version: 2.1
+            gemfile: gemfiles/active_record_42.gemfile
+            db: sqlite3
+          - ruby_version: 2.0
+            gemfile: gemfiles/active_record_42.gemfile
+            db: sqlite3
+    runs-on: ubuntu-16.04
+    env:
+      BUNDLE_GEMFILE: ${{ matrix.gemfile }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby_version }}
+          bundler-cache: true
+      - name: Build and test with Rake
+        env:
+          BUNDLE_GEMFILE: ${{ matrix.gemfile }}
+        run: bundle exec rake test
