@@ -12,7 +12,7 @@ jobs:
         ports:
           - 3306:3306
         env:
-          MYSQL_HOST: localhost
+          MYSQL_HOST: 127.0.0.1
           MYSQL_USERNAME: root
           MYSQL_ROOT_PASSWORD: root
           MYSQL_DATABASE: kaminari_test
@@ -126,7 +126,7 @@ jobs:
       POSTGRES_PORT: 5432
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      MYSQL_HOST: localhost
+      MYSQL_HOST: 127.0.0.1
       MYSQL_PORT: 3306
       MYSQL_USERNAME: root
       MYSQL_ROOT_PASSWORD: root
