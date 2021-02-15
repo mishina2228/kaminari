@@ -8,7 +8,7 @@ jobs:
   build:
     services:
       mysql:
-        image: mysql
+        image: mysql:5.7
         ports:
           - 3306:3306
         env:
@@ -16,7 +16,7 @@ jobs:
           MYSQL_USERNAME: root
           MYSQL_ROOT_PASSWORD: root
       postgresql:
-        image: postgres
+        image: postgres:9.6
         ports:
           - 5432:5432
         env:
@@ -110,7 +110,7 @@ jobs:
           - ruby_version: '2.1'
             gemfile: gemfiles/active_record_42.gemfile
             db: sqlite3
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-16.04
     env:
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
       DB: ${{ matrix.db }}
