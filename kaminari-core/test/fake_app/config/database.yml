@@ -15,7 +15,7 @@ mysql: &mysql
   adapter: mysql2
   host: localhost
   username: root
-  password:
+  password: root
   database: kaminari_test
 
 test:
