@@ -11,10 +11,6 @@ jobs:
         image: postgres:9.6
         ports:
           - 5432:5432
-        env:
-          POSTGRES_HOST: localhost
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
     strategy:
       fail-fast: false
       matrix:
@@ -106,10 +102,6 @@ jobs:
     env:
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
       DB: ${{ matrix.db }}
-      POSTGRES_HOST: localhost
-      POSTGRES_PORT: 5432
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
     steps:
       - uses: actions/checkout@v2
       - name: Set up Ruby
