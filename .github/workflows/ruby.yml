@@ -110,7 +110,7 @@ jobs:
           - ruby_version: '2.1'
             gemfile: gemfiles/active_record_42.gemfile
             db: sqlite3
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-16.04
     env:
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
       DB: ${{ matrix.db }}
