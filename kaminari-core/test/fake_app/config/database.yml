@@ -13,9 +13,9 @@ postgresql: &postgresql
 
 mysql: &mysql
   adapter: mysql2
-  host: 127.0.0.1
+  host: localhost
   username: root
-  password: root
+  password:
   database: kaminari_test
 
 test:
