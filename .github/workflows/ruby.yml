@@ -1,0 +1,120 @@
+name: Ruby
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  build:
+    services:
+      postgresql:
+        image: postgres:9.6
+        ports:
+          - 5432:5432
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby_version:
+          - ruby-head
+          - '2.7'
+          - '2.6'
+          - '2.5'
+          - '2.4'
+          - '2.3'
+          - 'jruby-9.2.9.0'
+        gemfile:
+          - gemfiles/active_record_61.gemfile
+          - gemfiles/active_record_60.gemfile
+          - gemfiles/active_record_52.gemfile
+          - gemfiles/active_record_51.gemfile
+          - gemfiles/active_record_50.gemfile
+          - gemfiles/active_record_42.gemfile
+          - gemfiles/active_record_41.gemfile
+          - gemfiles/active_record_edge.gemfile
+        db:
+          - sqlite3
+          - postgresql
+          - mysql
+        exclude:
+          - ruby_version: ruby-head
+            gemfile: gemfiles/active_record_42.gemfile
+          - ruby_version: ruby-head
+            gemfile: gemfiles/active_record_41.gemfile
+          - ruby_version: '2.7'
+            gemfile: gemfiles/active_record_52.gemfile
+          - ruby_version: '2.7'
+            gemfile: gemfiles/active_record_51.gemfile
+          - ruby_version: '2.7'
+            gemfile: gemfiles/active_record_50.gemfile
+          - ruby_version: '2.7'
+            gemfile: gemfiles/active_record_42.gemfile
+          - ruby_version: '2.7'
+            gemfile: gemfiles/active_record_41.gemfile
+          - ruby_version: '2.6'
+            gemfile: gemfiles/active_record_edge.gemfile
+          - ruby_version: '2.6'
+            gemfile: gemfiles/active_record_42.gemfile
+          - ruby_version: '2.6'
+            gemfile: gemfiles/active_record_41.gemfile
+          - ruby_version: '2.5'
+            gemfile: gemfiles/active_record_edge.gemfile
+          - ruby_version: '2.5'
+            gemfile: gemfiles/active_record_42.gemfile
+          - ruby_version: '2.5'
+            gemfile: gemfiles/active_record_41.gemfile
+          - ruby_version: '2.4'
+            gemfile: gemfiles/active_record_edge.gemfile
+          - ruby_version: '2.4'
+            gemfile: gemfiles/active_record_61.gemfile
+          - ruby_version: '2.4'
+            gemfile: gemfiles/active_record_60.gemfile
+          - ruby_version: '2.4'
+            gemfile: gemfiles/active_record_42.gemfile
+          - ruby_version: '2.4'
+            gemfile: gemfiles/active_record_41.gemfile
+          - ruby_version: '2.3'
+            gemfile: gemfiles/active_record_edge.gemfile
+          - ruby_version: '2.3'
+            gemfile: gemfiles/active_record_61.gemfile
+          - ruby_version: '2.3'
+            gemfile: gemfiles/active_record_60.gemfile
+          - ruby_version: 'jruby-9.2.9.0'
+            gemfile: gemfiles/active_record_42.gemfile
+          - ruby_version: 'jruby-9.2.9.0'
+            gemfile: gemfiles/active_record_41.gemfile
+        include:
+          - ruby_version: ruby-head
+            gemfile: gemfiles/active_record_edge.gemfile
+            db: sqlite3
+          - ruby_version: '2.2'
+            gemfile: gemfiles/active_record_51.gemfile
+            db: sqlite3
+          - ruby_version: '2.1'
+            gemfile: gemfiles/active_record_42.gemfile
+            db: sqlite3
+    runs-on: ubuntu-16.04
+    env:
+      BUNDLE_GEMFILE: ${{ matrix.gemfile }}
+      DB: ${{ matrix.db }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby_version }}
+          bundler-cache: true
+      - name: Start local MySQL
+        run:
+          sudo /etc/init.d/mysql start
+      - name: Verify MySQL connection from host
+        run: |
+          sudo apt-get install -y mysql-client libmysqlclient-dev
+          mysql --host localhost --port 3306 -uroot -proot -e "SHOW GRANTS FOR 'root'@'localhost'"
+          mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql --host localhost --port 3306 -uroot -proot mysql
+        continue-on-error: true
+      - name: Very PostgreSQL connection from host
+        run: |
+          sudo apt-get install -y postgresql
+          psql 'postgres://postgres:postgres@localhost:5432'
+        continue-on-error: true
+      - run: bundle exec rake test
