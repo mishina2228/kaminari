@@ -117,3 +117,4 @@ jobs:
           psql 'postgres://postgres:postgres@localhost:5432'
         continue-on-error: true
       - run: bundle exec rake test
+        continue-on-error: ${{ matrix.ruby_version == 'ruby-head' || matrix.ruby_version == 'jruby-9.2.9.0' || matrix.gemfile == 'gemfiles/active_record_edge.gemfile' }}
