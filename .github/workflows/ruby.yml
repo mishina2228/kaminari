@@ -11,6 +11,9 @@ jobs:
         image: postgres:9.6
         ports:
           - 5432:5432
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
     strategy:
       fail-fast: false
       matrix:
