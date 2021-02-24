@@ -18,7 +18,6 @@ jobs:
       fail-fast: false
       matrix:
         ruby_version:
-          - 'ruby-head'
           - '2.7'
           - '2.6'
           - '2.5'
@@ -38,10 +37,6 @@ jobs:
           - postgresql
           - mysql
         exclude:
-          - ruby_version: ruby-head
-            gemfile: gemfiles/active_record_42.gemfile
-          - ruby_version: ruby-head
-            gemfile: gemfiles/active_record_41.gemfile
           - ruby_version: '2.7'
             gemfile: gemfiles/active_record_52.gemfile
           - ruby_version: '2.7'
@@ -83,6 +78,9 @@ jobs:
           - ruby_version: 'jruby-9.2.9.0'
             gemfile: gemfiles/active_record_edge.gemfile 
         include:
+          - ruby_version: 'ruby-head'
+            gemfile: gemfiles/active_record_edge.gemfile
+            db: sqlite3
           - ruby_version: '2.2'
             gemfile: gemfiles/active_record_51.gemfile
             db: sqlite3
