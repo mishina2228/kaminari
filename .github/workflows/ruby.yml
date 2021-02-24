@@ -93,8 +93,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Start local MySQL
-        run:
-          sudo /etc/init.d/mysql start
+        run: sudo /etc/init.d/mysql start
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
